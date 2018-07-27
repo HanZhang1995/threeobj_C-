@@ -16,14 +16,7 @@ int job::get_p() const
 {
 	return J_Ip;
 }
-void job::set_w(const int & I_w)
-{
-	J_Iw = I_w;
-}
-int job::get_w() const
-{
-	return J_Iw;
-}
+
 void job::set_s(const int & I_s)
 {
 	J_Is = I_s;
@@ -106,15 +99,6 @@ int batch::get_p() const
 	return B_Ip;
 }
 
-void batch::set_w(const int & I_w)
-{
-	B_Iw = I_w;
-}
-
-int batch::get_w() const
-{
-	return B_Iw;
-}
 
 void batch::set_s(const int & I_s)
 {

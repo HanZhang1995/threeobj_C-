@@ -8,20 +8,19 @@ class job
 private:
 	int J_Inum;//工件号
 	int J_Ip;//工件加工时间
-	int J_Iw;//工件权值
 	int J_Is;//工件尺寸
 	int J_Ir;//工件到达时间
 	int J_Id;//工件截止时间
 public:
-	job() :J_Inum(0),J_Ip(0), J_Iw(0), J_Is(0), J_Ir(0), J_Id(0)
+	job() :J_Inum(0),J_Ip(0), J_Is(0), J_Ir(0), J_Id(0)
 	{
 
 	};
-	job(int I_num,int I_p, int I_w, int I_s, int I_r, int I_d) :J_Inum(I_num),J_Ip(I_p), J_Iw(I_w), J_Is(I_s), J_Ir(I_r), J_Id(I_d)
+	job(int I_num,int I_p, int I_w, int I_s, int I_r, int I_d) :J_Inum(I_num),J_Ip(I_p), J_Is(I_s), J_Ir(I_r), J_Id(I_d)
 	{
 
 	};
-	job(int I_p, int I_w, int I_s, int I_r, int I_d) :J_Ip(I_p), J_Iw(I_w), J_Is(I_s), J_Ir(I_r), J_Id(I_d)
+	job(int I_p, int I_w, int I_s, int I_r, int I_d) :J_Ip(I_p), J_Is(I_s), J_Ir(I_r), J_Id(I_d)
 	{
 
 	};
@@ -30,8 +29,6 @@ public:
 	int get_num() const;			//获取J_Inum
 	void set_p(const int & I_p);//更改J_Ip
 	int get_p() const;			//获取J_Ip
-	void set_w(const int & I_w);//更改J_Iw
-	int get_w() const;			//获取J_Iw
 	void set_s(const int & I_s);//更改J_Is
 	int get_s() const;			//获取J_Is
 	void set_r(const int & I_r);//更改J_Ir
@@ -44,7 +41,6 @@ class batch
 private:
 	int B_Inum;//批的编号
 	int B_Ip;//批的加工时间
-	int B_Iw;//批的权重
 	int B_Is;//批的尺寸
 	int B_IPb;//批的完工时间
 	int B_ICb;//批的完工时间
@@ -60,15 +56,15 @@ public:
 	void cal_B_Cb();//计算当前批的完工时间
 	void cal_B_Sb();//计算当前批的开工时间
 	void cal_B_Tb();//计算当前批的延误时间
-	batch() :B_Inum(0),B_Ip(0),B_Iw(0),B_Is(0),B_ICb(0),B_ISb(0),B_ITb(0),B_IMs(M_s), B_IMnum(0), B_Irs(M_s), B_IPb(0)
+	batch() :B_Inum(0),B_Ip(0),B_Is(0),B_ICb(0),B_ISb(0),B_ITb(0),B_IMs(M_s), B_IMnum(0), B_Irs(M_s), B_IPb(0)
 	{
 
 	};
-	batch(int Inum) :B_Inum(Inum), B_Ip(0), B_Iw(0), B_Is(0), B_ICb(0), B_ISb(0), B_ITb(0), B_IMs(M_s), B_IMnum(0),B_Irs(M_s), B_IPb(0)
+	batch(int Inum) :B_Inum(Inum), B_Ip(0), B_Is(0), B_ICb(0), B_ISb(0), B_ITb(0), B_IMs(M_s), B_IMnum(0),B_Irs(M_s), B_IPb(0)
 	{
 
 	};
-	batch(int Inum,int Ip,int Iw,int Is,int ICb,int ISb,int ITb,int IMnum) :B_Inum(Inum), B_Ip(Ip), B_Iw(Iw), B_Is(Is), B_ICb(ICb), 
+	batch(int Inum,int Ip,int Iw,int Is,int ICb,int ISb,int ITb,int IMnum) :B_Inum(Inum), B_Ip(Ip), B_Is(Is), B_ICb(ICb), 
 		B_ISb(ISb), B_ITb(ITb),B_IMs(M_s),B_IMnum(IMnum), B_Irs(M_s)
 	{
 
@@ -81,8 +77,6 @@ public:
 	int get_num() const;			//获取B_Inum
 	void set_p(const int & I_p);	//更改B_Ip
 	int get_p() const;				//获取B_Ip
-	void set_w(const int & I_w);	//更改B_Iw
-	int get_w() const;				//获取B_Iw
 	void set_s(const int & I_s);	//更改B_Is
 	int get_s() const;				//获取B_Is
 	void set_Pb(const int & I_Pb);	//更改B_IPb
