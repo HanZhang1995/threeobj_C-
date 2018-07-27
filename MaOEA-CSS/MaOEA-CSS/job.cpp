@@ -41,18 +41,15 @@ int job::get_d() const
 {
 	return J_Id;
 }
-/************************************************************************************************/
-
-int batch::cal_B_w()
+void job::set_C_j(const int & I_C_j)
 {
-	int i{ 0 };
-	
-	for (auto iter = v_Bjobs.begin; iter != v_Bjobs.cend(); ++iter)
-	{
-		i += iter->get_w();
-	}
-	return i;
+	C_j = I_C_j;
 }
+int job::get_C_j() const
+{
+	return C_j;
+}
+/************************************************************************************************/
 
 void batch::cal_B_Pb()
 {
@@ -181,15 +178,8 @@ int batch::get_rs() const
 }
 /************************************************************************************/
 
-void machine::cal_M_wc()
+void machine::cal_M_U()
 {
-	int j{0};
-	vector<batch>::iterator iter_batch;
-	for (iter_batch = v_Mbatches.begin(); iter_batch != v_Mbatches.end(); ++iter_batch)
-	{
-		j+=iter_batch->get_Cb()*iter_batch->cal_B_w();
-	}
-	M_I_TWC = j;
 }
 
 void machine::cal_M_TC()
@@ -242,15 +232,6 @@ int machine::get_Cmax() const
 	return M_I_Cmax;
 }
 
-void machine::set_TWC(const int & I_TWC)
-{
-	M_I_TWC = I_TWC;
-}
-
-int machine::get_TWC() const
-{
-	return M_I_TWC;
-}
 
 void machine::set_Tmax(const int & I_Tmax)
 {

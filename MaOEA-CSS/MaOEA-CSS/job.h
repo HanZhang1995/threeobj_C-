@@ -11,16 +11,17 @@ private:
 	int J_Is;//工件尺寸
 	int J_Ir;//工件到达时间
 	int J_Id;//工件截止时间
+	int C_j;//工件的完工时间，计算U_j
 public:
-	job() :J_Inum(0),J_Ip(0), J_Is(0), J_Ir(0), J_Id(0)
+	job() :J_Inum(0),J_Ip(0), J_Is(0), J_Ir(0), J_Id(0), C_j(0)
 	{
 
 	};
-	job(int I_num,int I_p, int I_w, int I_s, int I_r, int I_d) :J_Inum(I_num),J_Ip(I_p), J_Is(I_s), J_Ir(I_r), J_Id(I_d)
+	job(int I_num,int I_p, int I_w, int I_s, int I_r, int I_d) :J_Inum(I_num),J_Ip(I_p), J_Is(I_s), J_Ir(I_r), J_Id(I_d),C_j(0)
 	{
 
 	};
-	job(int I_p, int I_w, int I_s, int I_r, int I_d) :J_Ip(I_p), J_Is(I_s), J_Ir(I_r), J_Id(I_d)
+	job(int I_num):J_Inum(I_num), J_Ip(0), J_Is(0), J_Ir(0), J_Id(0), C_j(0)
 	{
 
 	};
@@ -35,6 +36,8 @@ public:
 	int get_r() const;			//获取J_Ir                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     ;
 	void set_d(const int & I_d);//更改J_Id
 	int get_d() const;			//获取J_Id
+	void set_C_j(const int & I_C_j);//更改J_Id
+	int get_C_j() const;			//获取J_Id
 };
 class batch
 {
@@ -51,7 +54,6 @@ private:
 	int B_Irs;//批当前的剩余空间
 public:
 	vector<job> v_Bjobs;//批中的工件集合
-	int cal_B_w();//计算当前批的总权重
 	void cal_B_Pb();//计算当前批的加工时间
 	void cal_B_Cb();//计算当前批的完工时间
 	void cal_B_Sb();//计算当前批的开工时间
@@ -102,19 +104,19 @@ private:
 	int M_IL;//机器的功率
 	int M_Is;//机器的容量
 	int M_I_Cmax;//机器的Cmax
-	int M_I_TWC;//机器的总加权完工时间
+	int M_I_U;//机器的总误工任务数
 	int M_I_Tmax;//机器的延误时间
 	int M_Bcount;//机器当中批数
 public:
 	vector<batch> v_Mbatches;//机器上的批集合
-	void cal_M_wc();//计算当前机器的总加权完工时间
+	void cal_M_U();//计算当前机器的总误工任务数
 	void cal_M_TC();//计算当前机器的能耗
 	void cal_M_T();//计算当前机器的最大延误时间
-	machine() :M_Inum(0), M_IL(0), M_Is(M_s),M_I_Cmax(0),M_I_TWC(0),M_I_Tmax(0),M_Bcount(0)
+	machine() :M_Inum(0), M_IL(0), M_Is(M_s),M_I_Cmax(0),M_I_U(0),M_I_Tmax(0),M_Bcount(0)
 	{
 
 	};
-	machine(int Inum) :M_Inum(Inum),M_Is(M_s), M_I_Cmax(0), M_I_TWC(0), M_I_Tmax(0), M_Bcount(0)
+	machine(int Inum) :M_Inum(Inum),M_Is(M_s), M_I_Cmax(0), M_I_U(0), M_I_Tmax(0), M_Bcount(0)
 	{
 		if (Inum > 0 && Inum <= M_1)
 		{
