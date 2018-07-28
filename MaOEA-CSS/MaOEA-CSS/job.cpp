@@ -1,3 +1,5 @@
+#ifndef _JOB_
+#define _JOB__
 #include"job.h"
 void job::set_num(const int & I_num)
 {
@@ -48,6 +50,14 @@ void job::set_C_j(const int & I_C_j)
 int job::get_C_j() const
 {
 	return C_j;
+}
+void job::set_T_j(const int & I_T_j)
+{
+	T_j = I_T_j;
+}
+int job::get_T_j()
+{
+	return T_j;
 }
 /************************************************************************************************/
 
@@ -232,6 +242,16 @@ int machine::get_Cmax() const
 	return M_I_Cmax;
 }
 
+void machine::set_U(const int & I_U)
+{
+	M_I_U = I_U;
+}
+
+int machine::get_U() const
+{
+	return M_I_U;
+}
+
 
 void machine::set_Tmax(const int & I_Tmax)
 {
@@ -253,3 +273,35 @@ int machine::get_B_num() const
 	return M_Bcount;
 }
 /********************************************************************************************/
+
+void scheme::cal_Fitness()
+{
+	for (auto i = v_Smachines.cbegin(); i != v_Smachines.cend(); ++i)
+	{
+		for (auto j = i->v_Mbatches.cbegin(); j != i->v_Mbatches.cend(); ++j)
+		{
+			for (auto k = j->v_Bjobs.cbegin(); k != j->v_Bjobs.cend(); ++k)
+			{
+				S_T += k->get_T_j;
+				if (k->set_C_j > k->get_d)
+				{
+					++S_U;
+				}
+
+			}
+		}
+		TC += (i->get_Cmax*i->get_L);
+	}
+}
+
+
+void chrom::set_Chro_Length(const int & Length)
+{
+	ChromLength = Length;
+}
+
+int chrom::get_Chro_Length() const
+{
+	return ChromLength;
+}
+#endif

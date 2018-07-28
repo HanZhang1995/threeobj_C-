@@ -11,6 +11,7 @@ private:
 	int J_Is;//工件尺寸
 	int J_Ir;//工件到达时间
 	int J_Id;//工件截止时间
+	int T_j;//工件的延迟时间
 	int C_j;//工件的完工时间，计算U_j
 public:
 	job() :J_Inum(0),J_Ip(0), J_Is(0), J_Ir(0), J_Id(0), C_j(0)
@@ -36,8 +37,10 @@ public:
 	int get_r() const;			//获取J_Ir                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     ;
 	void set_d(const int & I_d);//更改J_Id
 	int get_d() const;			//获取J_Id
-	void set_C_j(const int & I_C_j);//更改J_Id
-	int get_C_j() const;			//获取J_Id
+	void set_C_j(const int & I_C_j);//更改C_j
+	int get_C_j() const;			//获取C_j
+	void set_T_j(const int & I_T_j);//更改T_j
+	int get_T_j();					//获取T_j
 };
 class batch
 {
@@ -140,8 +143,8 @@ public:
 	int get_s() const;					//获取M_Is
 	void set_Cmax(const int & I_Cmax);	//更改M_I_Cmax
 	int get_Cmax() const;				//获取M_I_Cmax
-	void set_TWC(const int & I_TWC);	//更改M_I_TWC
-	int get_TWC() const;				//获取M_I_TWC
+	void set_U(const int & I_U);	//更改M_I_U
+	int get_U() const;				//获取M_I_U
 	void set_Tmax(const int & I_Tmax);	//更改M_I_Tmax
 	int get_Tmax() const;				//获取M_I_Tmax
 	void set_B_num(const int & I_Bnum);	//更改M_Bcount
@@ -152,23 +155,22 @@ public:
 class scheme
 {
 private:
-	int S_T;
-	int S_U;
-	int TC;
+	int S_T;//总误工时间
+	int S_U;//总误工数量
+	int TC;//能耗
 public:
 	vector<machine> v_Smachines;	
-	void cal_S_T();
-	void cal_S_U();
-	void cal_TC();
-	//string Sname;
+	void cal_Fitness();//计算总误工时间,总误工数量,能耗
 	scheme() :S_T(0),S_U(0),TC(0){};
 	~scheme() {};
+
 };
 class chrom
 {
 private:
 	int ChromLength;//长度
 public:
+	scheme chro_sche;//对染色体进行调度
 	vector<int> ChromFitness;//适应度
 	vector<job> v_chromejobs;
 	chrom() :ChromLength(Job_Num)
@@ -177,4 +179,7 @@ public:
 		ChromFitness.reserve(Obj_Num);
 	};
 	~chrom() {};
+	void set_Chro_Length(const int &Length);
+	int get_Chro_Length()const;
+
 };
